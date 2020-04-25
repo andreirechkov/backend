@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'channels',
     'chat',
+    'api'
 ]
 
 MIDDLEWARE = [
@@ -72,6 +73,14 @@ TEMPLATES = [
 WSGI_APPLICATION = 'firstep.wsgi.application'
 ASGI_APPLICATION = 'firstep.routing.application'
 
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
