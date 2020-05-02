@@ -1,10 +1,67 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions
 from django.contrib.auth.models import User
-from api.serializers import TestSerializer, UserSerializer
+from django.contrib.auth import get_user_model
+from django.shortcuts import get_object_or_404
+from api.serializers import TestSerializer, UserSerializer, ChatSerializer
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
+
+from chat.models import Contact, Chat
 from .models import Test
+
+from rest_framework.generics import (
+    ListAPIView,
+    RetrieveAPIView,
+    CreateAPIView,
+    DestroyAPIView,
+    UpdateAPIView
+)
+
+User = get_user_model()
+
+
+def get_user_contact(username):
+    user = get_object_or_404(User, username=username)
+    contact = get_object_or_404(Contact, user=user)
+    return contact
+
+
+class ChatListView(ListAPIView):
+    serializer_class = ChatSerializer
+    permission_classes = (permissions.AllowAny,)
+
+    def get_queryset(self):
+        queryset = Chat.objects.all()
+        username = self.request.query_params.get('username', None)
+        if username is not None:
+            contact = get_user_contact(username)
+            queryset = contact.chats.all()
+        return queryset
+
+
+class ChatDetailView(RetrieveAPIView):
+    queryset = Chat.objects.all()
+    serializer_class = ChatSerializer
+    permission_classes = (permissions.AllowAny,)
+
+
+class ChatCreateView(CreateAPIView):
+    queryset = Chat.objects.all()
+    serializer_class = ChatSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
+
+class ChatUpdateView(UpdateAPIView):
+    queryset = Chat.objects.all()
+    serializer_class = ChatSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
+
+class ChatDeleteView(DestroyAPIView):
+    queryset = Chat.objects.all()
+    serializer_class = ChatSerializer
+    permission_classes = (permissions.IsAuthenticated,)
 
 
 class TestViewSet(viewsets.ModelViewSet):

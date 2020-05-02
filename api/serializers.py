@@ -2,7 +2,15 @@ from django.db import transaction
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
+
+from chat.models import Chat
 from .models import Test, Person
+
+
+class ChatSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Chat
+        fields = '__all__'
 
 
 class TestSerializer(serializers.ModelSerializer):

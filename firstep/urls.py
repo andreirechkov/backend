@@ -14,6 +14,6 @@ router.register(r'api/users', views.UsersViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path(r'', include(router.urls)),
-    path('chat/', include('chat.urls')),
+    path('api/chat/', include('api.urls', namespace='chat')),
     path(r'api/auth/', GetAuthToken.as_view()),
 ]
