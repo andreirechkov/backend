@@ -2,13 +2,13 @@ from rest_framework import viewsets, permissions
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
-from api.serializers import TestSerializer, UserSerializer, ChatSerializer
+from api.serializers import TestSerializer, UserSerializer, ChatSerializer, PersonSerializer
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 
 from chat.models import Contact, Chat
-from .models import Test
+from .models import Test, Person
 
 from rest_framework.generics import (
     ListAPIView,
@@ -66,9 +66,16 @@ class TestViewSet(viewsets.ModelViewSet):
     serializer_class = TestSerializer
 
 
+class PersonViewSet(viewsets.ModelViewSet):
+    queryset = Person.objects.all()
+    serializer_class = PersonSerializer
+
+
+
 class UsersViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
 
 
 class GetAuthToken(ObtainAuthToken):

@@ -9,6 +9,7 @@ from api.views import GetAuthToken
 router = routers.DefaultRouter()
 router.register(r'test', views.TestViewSet)
 router.register(r'api/users', views.UsersViewSet)
+router.register(r'api/profile', views.PersonViewSet)
 
 
 urlpatterns = [
