@@ -42,7 +42,8 @@ class TestSerializer(serializers.ModelSerializer):
 class PersonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Person
-        fields = ['firstName', 'lastName', 'email', 'phone', 'typeUser']
+        fields = ['firstName', 'lastName', 'email', 'phone', 'typeUser', 'image', 'link', 'city', 'area',
+                  'created_at', 'rating', 'content']
 
 
 class UserSerializer(serializers.ModelSerializer):
