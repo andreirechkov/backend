@@ -22,13 +22,16 @@ class Person(models.Model):
     typeUser = models.CharField(max_length=256, null=True)
     rating = models.IntegerField(null=True, blank=True)
 
-
-class Test(models.Model):
-    email = models.CharField(max_length=256)
-    password = models.CharField(max_length=256)
-
-    class Meta:
-        verbose_name_plural = "Test"
-
     def __str__(self):
-        return self.email
+        return self.image
+
+
+class News(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='news')
+    nameNews = models.CharField(max_length=256, null=True)
+    content = models.TextField(null=True)
+    rating = models.IntegerField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    images = models.ImageField(blank=True, null=True, upload_to=upload_path)
+    coordinate = models.CharField(max_length=256, null=True)
+    price = models.CharField(max_length=256, null=True)

@@ -10,7 +10,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 router = routers.DefaultRouter()
-router.register(r'test', views.TestViewSet)
+router.register(r'api/news', views.NewsViewSet)
 router.register(r'api/users', views.UsersViewSet)
 router.register(r'api/profile', views.PersonViewSet)
 

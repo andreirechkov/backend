@@ -1,14 +1,13 @@
 from rest_framework import viewsets, permissions
 from django.contrib.auth.models import User
-from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
-from api.serializers import TestSerializer, UserSerializer, ChatSerializer, PersonSerializer
+from api.serializers import UserSerializer, ChatSerializer, PersonSerializer, NewsSerializer
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 
 from chat.models import Contact, Chat
-from .models import Test, Person
+from .models import Person, News
 
 from rest_framework.generics import (
     ListAPIView,
@@ -18,6 +17,7 @@ from rest_framework.generics import (
     UpdateAPIView
 )
 
+
 def get_user_contact(username):
     user = get_object_or_404(User, username=username)
     contact = get_object_or_404(Contact, user=user)
@@ -26,7 +26,7 @@ def get_user_contact(username):
 
 class ChatListView(ListAPIView):
     serializer_class = ChatSerializer
-    permission_classes = (permissions.AllowAny, )
+    permission_classes = (permissions.AllowAny,)
 
     def get_queryset(self):
         queryset = Chat.objects.all()
@@ -61,9 +61,9 @@ class ChatDeleteView(DestroyAPIView):
     permission_classes = (permissions.IsAuthenticated,)
 
 
-class TestViewSet(viewsets.ModelViewSet):
-    queryset = Test.objects.all()
-    serializer_class = TestSerializer
+class NewsViewSet(viewsets.ModelViewSet):
+    queryset = News.objects.all()
+    serializer_class = NewsSerializer
 
 
 class PersonViewSet(viewsets.ModelViewSet):
@@ -71,11 +71,9 @@ class PersonViewSet(viewsets.ModelViewSet):
     serializer_class = PersonSerializer
 
 
-
 class UsersViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-
 
 
 class GetAuthToken(ObtainAuthToken):

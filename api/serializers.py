@@ -5,7 +5,7 @@ from rest_framework.authtoken.models import Token
 
 from chat.models import Chat
 from chat.views import get_user_contact
-from .models import Test, Person
+from .models import News, Person
 
 
 class ContactSerializer(serializers.StringRelatedField):
@@ -33,17 +33,18 @@ class ChatSerializer(serializers.ModelSerializer):
         return chat
 
 
-class TestSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Test
-        fields = ['id', 'email', 'password']
-
-
 class PersonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Person
         fields = ['firstName', 'lastName', 'email', 'phone', 'typeUser', 'image', 'link', 'city', 'area',
                   'created_at', 'rating', 'content']
+
+
+class NewsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = News
+        fields = ['id', 'user', 'nameNews', 'content', 'rating', 'images', 'coordinate', 'price',
+                  'created_at']
 
 
 class UserSerializer(serializers.ModelSerializer):
