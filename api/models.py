@@ -23,7 +23,7 @@ class Person(models.Model):
     rating = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
-        return self.image
+        return self.user.username
 
 
 class News(models.Model):

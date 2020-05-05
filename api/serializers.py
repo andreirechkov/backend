@@ -3,9 +3,15 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 
-from chat.models import Chat
+from chat.models import Chat, Contact
 from chat.views import get_user_contact
 from .models import News, Person
+
+
+class ContactSerializerCreate(serializers.ModelSerializer):
+    class Meta:
+        model = Contact
+        fields = ['id', 'user', 'friends']
 
 
 class ContactSerializer(serializers.StringRelatedField):
@@ -18,7 +24,7 @@ class ChatSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Chat
-        fields = ('id', 'messages', 'participants')
+        fields = ['id', 'messages', 'participants']
         read_only = 'id'
 
     def create(self, validated_data):

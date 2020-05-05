@@ -13,6 +13,7 @@ router = routers.DefaultRouter()
 router.register(r'api/news', views.NewsViewSet)
 router.register(r'api/users', views.UsersViewSet)
 router.register(r'api/profile', views.PersonViewSet)
+router.register(r'api/contact', views.ContactViewSet)
 
 
 urlpatterns = [
