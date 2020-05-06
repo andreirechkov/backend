@@ -89,4 +89,4 @@ class GetAuthToken(ObtainAuthToken):
         user = User.objects.get(id=token.user_id)
         userSerializer = UserSerializer(user, many=False)
 
-        return Response({'token': token.key, 'id': token.user_id})
+        return Response({'token': token.key, 'id': token.user_id, 'username': user.username})
