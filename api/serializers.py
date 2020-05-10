@@ -49,8 +49,8 @@ class PersonSerializer(serializers.ModelSerializer):
 class NewsSerializer(serializers.ModelSerializer):
     class Meta:
         model = News
-        fields = ['id', 'user', 'nameNews', 'content', 'rating', 'images', 'coordinate', 'price',
-                  'created_at']
+        fields = ['id', 'user', 'nameNews', 'vacancy', 'workTime', 'experience', 'content', 'price',
+                  'category', 'coordinate', 'email', 'phone', 'image', 'created_at']
 
 
 class UserSerializer(serializers.ModelSerializer):
