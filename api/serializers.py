@@ -50,7 +50,8 @@ class NewsSerializer(serializers.ModelSerializer):
     class Meta:
         model = News
         fields = ['id', 'user', 'nameNews', 'vacancy', 'workTime', 'experience', 'content', 'price',
-                  'category', 'coordinate', 'email', 'phone', 'image', 'created_at']
+                  'category', 'coordinate', 'email', 'phone', 'image1', 'image2', 'image3', 'image4',
+                  'created_at']
 
 
 class UserSerializer(serializers.ModelSerializer):
